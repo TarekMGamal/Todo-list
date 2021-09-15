@@ -1,0 +1,34 @@
+body {
+    background-color: darkslategrey;
+    color: antiquewhite;
+}
+h1 {
+    text-align: center;
+}
+table {
+    width: 100%;
+}
+th {
+    font-size: x-large;
+    height: 70px;
+}
+tr {
+    text-align: center;
+}
+td {
+    padding: 20px;
+    font-size: large;
+}
+button {
+    text-align: center;
+}
+.button {
+    width: 5%;
+}
+.date {
+    width: 10%;
+}
+.content {
+    border-radius: 20px;
+    background-color: grey;
+}
