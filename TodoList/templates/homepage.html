@@ -9,30 +9,94 @@
 </head>
 <body>
     <h1>Todo List</h1>
-    <div>
-        
-    </div>
+    <br><br><br>
+    <form action="/add" method="post">
+        <div>
+            <label>Enter new Todo and Date: </label>
+            <input type="text" name="newtodo" placeholder="Enter Todo..." required>
+            <input type="number" name="newdateday"  placeholder="D" required>
+            <input type="number" name="newdatemonth" placeholder="M" required>
+            <input type="number" name="newdateyear" placeholder="Y" required>
+            <button type="submit">Add</button>
+        </div>
+    </form>
+    <br><br><br><br><br><br><br><br>
     <table>
         <thead>
             <tr>
                 <th scope="col">Todo</th>
                 <th scope="col" class="date">Due Date</th>
                 <th scope="col" class="button"></th>
-                <th scope="col" class="button"></th>
-                <th scope="col" class="button"></th>
             </tr>
         </thead>
         <tbody>
             {% for todo in todolist %}
+                {% if todo.isdone == False %}
                 <tr>
                     <td class="content">{{todo.todo}}</td>
                     <td>{{todo.date}}</td>
-                    <td><input type="checkbox"></td>
-                    <td><button type="button">Edit</button></td>>
-                    <td><button type="button">Delete</button></td>>
+                    <td>
+                        <form action="/delete/{{ todo.id }}" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>                
                 </tr>
+                <tr>
+                    <form action="/edit/{{ todo.id }}" method="post">
+                        <td>
+                            <input type="text" name="edittodo" placeholder="Edit Todo..." required>
+                            <input type="number" name="editday" , placeholder="D" required>
+                            <input type="number" name="editmonth" , placeholder="M" required>
+                            <input type="number" name="edityear" , placeholder="Y" required>
+                            <label>mark finished</label>
+                            <input type="checkbox" name="editisdone">
+                            <button type="submit">Edit</button>
+                        </td>
+                    </form>
+                </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
-    </table>
-</body>
+        </table>
+        <br><br><br><br><br><br><br><br>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Todo</th>
+                    <th scope="col" class="date">Due Date</th>
+                    <th scope="col" class="button"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in todolist %}
+                {% if todo.isdone == True %}
+                <tr>
+                    <td class="content">{{todo.todo}}</td>
+                    <td>{{todo.date}}</td>
+                    <td>
+                        <form action="/delete/{{ todo.id }}" method="POST">
+                            <button type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <form action="/edit/{{ todo.id }}" method="post">
+                        <td>
+                            <input type="text" name="edittodo" placeholder="Edit Todo..." required>
+                            <input type="number" name="editday" , placeholder="D" required>
+                            <input type="number" name="editmonth" , placeholder="M" required>
+                            <input type="number" name="edityear" , placeholder="Y" required>
+                            <label>mark unfinished</label>
+                            <input type="checkbox" name="editisdone">
+                            <button type="submit">Edit</button>
+                        </td>
+                    </form>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
 </html>
