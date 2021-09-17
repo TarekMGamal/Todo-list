@@ -25,23 +25,29 @@ def addtask():
     database.session.commit()
     return redirect(url_for('TodoList'))
 
-
-@app.route('/edit/<int:task_id>', methods=['POST' , 'GET'])
+@app.route('/edittodo/<int:task_id>', methods=['POST' , 'GET'])
 def edittask(task_id):
     todo = request.form.get("edittodo")
+    existingtask = task.query.filter_by(id=task_id).first()
+    existingtask.todo = todo
+    database.session.commit()
+    return redirect(url_for('TodoList'))
+
+@app.route('/editdate/<int:task_id>', methods=['POST' , 'GET'])
+def editdate(task_id):
     dateday = request.form.get("editday")
     datemonth = request.form.get("editmonth")
     dateyear = request.form.get("edityear")
     date = datetime.datetime(int(dateyear) , int(datemonth) , int(dateday))
-    done = request.form.get("editisdone")
-    if done == 'on':
-        done = True
-    else:
-        done = False
     existingtask = task.query.filter_by(id=task_id).first()
-    existingtask.todo = todo
     existingtask.date = date
-    existingtask.isdone = done
+    database.session.commit()
+    return redirect(url_for('TodoList'))
+
+@app.route('/editisdone/<int:task_id>', methods=['POST' , 'GET'])
+def editisdone(task_id):
+    existingtask = task.query.filter_by(id=task_id).first()
+    existingtask.isdone = not existingtask.isdone
     database.session.commit()
     return redirect(url_for('TodoList'))
 

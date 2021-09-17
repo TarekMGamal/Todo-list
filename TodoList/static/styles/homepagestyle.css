@@ -26,10 +26,12 @@ button {
     width: 5%;
 }
 .date {
-    width: 10%;
+    width: 20%;
 }
 .content {
     border-radius: 20px;
     background-color: grey;
 }
-
+.section {
+    background-color: teal;
+}
